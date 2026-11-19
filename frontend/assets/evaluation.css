@@ -1,0 +1,37 @@
+/* Velocity 5.6: clarify repair status without changing the sport-glass aesthetic. */
+#apply-repair:not(:disabled){background:linear-gradient(135deg,#d9ff99,#a9ee6a)!important;color:#101a13!important;border-color:#d9ff99!important;box-shadow:0 4px 24px #b5f98b25!important;font-weight:800}
+#apply-repair:not(:disabled):hover{background:#eaffc2!important;box-shadow:0 6px 28px #b5f98b44!important}
+#repair-badge.passed{border-color:#d9ff99;color:#d9ff99}
+.finding h3{color:#f5f9f7}
+.finding p{color:#c3d2d7}
+@media(prefers-reduced-motion:reduce){#apply-repair:not(:disabled){transition:none!important}}
+
+/* Workspace Snippet Picker & Controls */
+.quiet-select{border:1px solid #ffffff34;border-radius:4px;background:#0d141ecc;padding:9px 12px;color:#eef4f4;font:600 10px var(--mono);cursor:pointer;outline:none;max-width:210px}
+.quiet-select:hover{background:#ffffff23}
+.quiet-select option{background:#0c1219;color:#eef4f4}
+
+/* AI Assist Toggle */
+.ai-toggle-label{display:inline-flex;align-items:center;gap:6px;font:700 10px var(--mono);color:#c8d7dc;cursor:pointer;padding:10px 12px;border:1px solid #ffffff28;border-radius:2px;background:#ffffff0d;transition:all .2s ease;user-select:none}
+.ai-toggle-label:hover{background:#ffffff1f;border-color:#ffffff55;color:#fff}
+.ai-toggle-label input{accent-color:var(--accent);cursor:pointer}
+.ai-toggle-label.active{background:#b5f98b18;border-color:#b5f98b88;color:#d9ff99}
+
+/* SQLite Database History Panel */
+.history-panel{display:none;position:relative;margin-top:16px;border:1px solid #ffffff26;border-radius:4px;background:#060a10f0;backdrop-filter:blur(24px);padding:18px;max-height:360px;overflow-y:auto;box-shadow:0 12px 40px #00000088;z-index:20}
+.history-panel.open{display:block}
+.history-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid #ffffff18;margin-bottom:12px}
+.history-header strong{font:700 11px var(--mono);letter-spacing:.12em;color:#e6f4af}
+.history-actions{display:flex;gap:8px}
+.history-list{display:flex;flex-direction:column;gap:8px}
+.history-card{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;background:#ffffff08;border:1px solid #ffffff15;border-radius:3px;font-size:11px}
+.history-card:hover{background:#ffffff12}
+.history-card-meta{display:flex;align-items:center;gap:10px;font:11px var(--mono);flex-wrap:wrap}
+.history-card-meta .hist-lang{color:#e7fe99;font-weight:700}
+.history-card-meta .hist-action{color:#9babb4;text-transform:uppercase}
+.history-card-meta .hist-status{padding:2px 6px;border-radius:2px;font-size:9px;border:1px solid #ffffff30}
+.history-card-meta .hist-status.passed{border-color:#a9ee6a;color:#a9ee6a}
+.history-card-meta .hist-status.failed{border-color:#ffa99a;color:#ffa99a}
+.history-card-actions{display:flex;gap:6px}
+.history-card button{padding:4px 8px;font:700 9px var(--mono);border:1px solid #ffffff30;background:#ffffff15;color:#fff;border-radius:2px;cursor:pointer}
+.history-card button:hover{background:var(--accent);color:#09120e}

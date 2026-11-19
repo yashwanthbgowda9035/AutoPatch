@@ -1,0 +1,25 @@
+AUTOPATCH - COMPLETE VS CODE + DEPLOYMENT PROJECT
+
+LOCAL DEVELOPMENT (FULL FEATURES)
+1. Extract the entire ZIP.
+2. Open the AutoPatch_VSCODE_DEPLOY_READY folder in VS Code.
+3. Open Terminal -> New Terminal.
+4. Run SETUP_VSCODE.bat once.
+5. Run RUN_VSCODE.bat (auto reload), or press F5 to debug.
+6. Open http://127.0.0.1:8015.
+7. Start Docker Desktop for isolated code execution and tests.
+
+QUALITY CHECKS
+Run RUN_QUALITY_GATE.bat before publishing.
+
+SAFE DOCKER PREVIEW (NO USER CODE EXECUTION)
+Run DEPLOY_PREVIEW.bat; open http://127.0.0.1:8016.
+
+GITHUB
+Create an empty repository and run PUSH_TO_GITHUB.bat.
+
+CLOUD DEPLOYMENT
+Read VSCODE_DEPLOY_GUIDE.md. Dockerfile and render.yaml provide
+public preview mode with code execution and token publishing disabled.
+
+The original UI, 3D-style glass effects and sporty animations are unchanged.

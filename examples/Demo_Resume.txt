@@ -1,0 +1,7 @@
+DEMO RESUME — Fictional candidate; not a real person
+Education: B.Tech in Computer Science
+Graduating 2027
+CGPA: 8.2 / 10
+Skills: Python, SQL, Git, Docker, Excel, Power BI, HTML, CSS, JavaScript, React
+Academic Project: Built a FastAPI dashboard with Docker-based tests.
+Experience: 0 years of experience

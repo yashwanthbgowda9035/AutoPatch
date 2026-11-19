@@ -1,0 +1,70 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "AutoPatch: 1. Setup Python environment",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "SETUP_VSCODE.bat"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "AutoPatch: 2. Run local website",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "RUN_VSCODE.bat"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "AutoPatch: 3. Run quality gate",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "RUN_QUALITY_GATE.bat"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "AutoPatch: 4. Safe Docker preview",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "DEPLOY_PREVIEW.bat"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "AutoPatch: 5. Push to GitHub",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "PUSH_TO_GITHUB.bat"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

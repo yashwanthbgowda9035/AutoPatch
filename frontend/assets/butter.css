@@ -1,0 +1,75 @@
+/* Velocity 5.4 — Butter Motion: compositor-led movement and short optical blur.
+   Black/white glass + restrained accents. No artificial output/status animation. */
+:root{--butter-ease:cubic-bezier(.22,1,.36,1)}
+.scene{
+  transform:translateZ(0) scale(.975)!important;
+  opacity:0;filter:blur(4px) brightness(.97)!important;
+  transition:transform .38s var(--butter-ease),opacity .31s ease,filter .30s ease,visibility 0s linear .40s!important;
+  backface-visibility:hidden;will-change:transform,opacity;
+}
+.scene.active{transform:translateZ(0) scale(1)!important;opacity:1;filter:blur(0) brightness(1)!important;transition-delay:0s!important}
+.scene.scene-exit{
+  transform:translateZ(0) scale(.935)!important;filter:blur(5px) brightness(.9)!important;
+  opacity:0!important;visibility:visible!important;pointer-events:none!important;
+  transition:transform .34s cubic-bezier(.3,0,.6,1),opacity .27s ease,filter .25s ease!important;
+}
+.scene.scene-enter{
+  animation:butterSceneIn .39s var(--butter-ease) both!important;
+  visibility:visible!important;pointer-events:auto!important;
+}
+@keyframes butterSceneIn{
+  0%{opacity:0;transform:translateZ(0) scale(1.055);filter:blur(5px) brightness(1.07)}
+  48%{opacity:.88;filter:blur(1px) brightness(1.01)}
+  100%{opacity:1;transform:translateZ(0) scale(1);filter:blur(0) brightness(1)}
+}
+/* Staggered reveal moves only a few pixels in depth, not the entire panel up. */
+.hero-line>span,.hero-description,.hero-buttons,.hero-coordinates,
+.tool-scene.active .scene-intro,.tool-scene.active .glass-panel{
+  animation:butterReveal .38s var(--butter-ease) both!important;
+  transform-origin:center center!important;
+}
+.hero-line:nth-child(2)>span{animation-delay:.05s!important}
+.hero-line:nth-child(3)>span{animation-delay:.10s!important}
+.hero-description{animation-delay:.12s!important}.hero-buttons{animation-delay:.15s!important}
+.hero-coordinates{animation-delay:.05s!important}
+.tool-scene.active .scene-intro{animation-delay:.03s!important}
+.tool-scene.active .glass-panel{animation-delay:.05s!important}
+.tool-scene.active .glass-panel:nth-child(2){animation-delay:.08s!important}
+.tool-scene.active .glass-panel:nth-child(3){animation-delay:.11s!important}
+@keyframes butterReveal{from{opacity:0;transform:translateZ(0) scale(.982)}to{opacity:1;transform:translateZ(0) scale(1)}}
+/* Reduce repeatedly redrawn large frosted areas. Glass still looks translucent. */
+.site-header{backdrop-filter:blur(12px) saturate(115%)!important;-webkit-backdrop-filter:blur(12px) saturate(115%)!important}
+.site-nav{backdrop-filter:blur(12px) saturate(120%)!important;-webkit-backdrop-filter:blur(12px) saturate(120%)!important}
+.nav-link,.main-cta,.sub-cta,.action-primary,.action-secondary,.minimal-btn,.quiet-button,.file-button,.explore-next{
+  backdrop-filter:blur(8px) saturate(125%)!important;-webkit-backdrop-filter:blur(8px) saturate(125%)!important;
+  transition:transform .22s var(--butter-ease),opacity .22s ease,background-color .22s ease,border-color .22s ease!important;
+}
+.glass-panel{backdrop-filter:blur(9px) saturate(110%)!important;-webkit-backdrop-filter:blur(9px) saturate(110%)!important}
+.sport-dock-preview{
+  backdrop-filter:blur(14px) saturate(125%)!important;-webkit-backdrop-filter:blur(14px) saturate(125%)!important;
+  filter:none!important;transition:opacity .18s ease,transform .27s var(--butter-ease),visibility 0s linear .18s!important;
+  transform:translate3d(-50%,6px,0) scale(.95)!important;
+}
+.sport-dock-preview.open{filter:none!important;transform:translate3d(-50%,0,0) scale(1)!important;transition-delay:0s!important}
+.site-nav .nav-link{transition:transform .2s var(--butter-ease),background .16s ease,border-color .16s ease!important}
+.glass-panel{transition:transform .22s ease,border-color .22s ease!important}
+/* Heavy animated full-screen filters were a primary source of frame drops. */
+.kinetic-halo{filter:none!important;opacity:.48}
+.scene-home .landscape{filter:none!important;opacity:.15}
+.filmgrain{opacity:.045}
+#sports-pointer-glow{left:0!important;top:0!important;will-change:transform}
+/* Pause hero-only animations while browsing functional modules. */
+.scene-home:not(.active) .kinetic-sphere,
+.scene-home:not(.active) .sphere-grid,
+.scene-home:not(.active) .sphere-orbit,
+.scene-home:not(.active) .kinetic-floating,
+.scene-home:not(.active) .ticker-track,
+.scene-home:not(.active) .kinetic-beam,
+.scene-home:not(.active) .kinetic-halo{animation-play-state:paused!important}
+@media(hover:none),(pointer:coarse){.glass-panel{transform:none!important}}
+@media(prefers-reduced-motion:reduce){
+  .scene,.scene.active,.scene.scene-exit,.scene.scene-enter{transition:none!important;animation:none!important;filter:none!important;transform:none!important}
+  .hero-line>span,.hero-description,.hero-buttons,.hero-coordinates,.tool-scene.active .scene-intro,.tool-scene.active .glass-panel{animation:none!important}
+}
+body.motion-off .scene,body.motion-off .scene.active,body.motion-off .scene.scene-exit,body.motion-off .scene.scene-enter{transition:none!important;animation:none!important;filter:none!important;transform:none!important}
+body.motion-off .hero-line>span,body.motion-off .hero-description,body.motion-off .hero-buttons,body.motion-off .hero-coordinates,body.motion-off .tool-scene.active .scene-intro,body.motion-off .tool-scene.active .glass-panel{animation:none!important}

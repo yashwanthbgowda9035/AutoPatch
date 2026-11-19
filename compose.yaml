@@ -1,0 +1,23 @@
+# Safe, local preview: static analysis/repair and UI, but NO Docker code execution.
+# For full isolated execution, run the Windows VS Code local setup with Docker Desktop.
+services:
+  autopatch-preview:
+    build: .
+    ports:
+      - "127.0.0.1:8016:8015"
+    environment:
+      AUTOPATCH_PUBLIC_DEMO: "1"
+      AUTOPATCH_ALLOWED_HOSTS: "localhost,127.0.0.1"
+      PORT: "8015"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,nosuid,nodev,size=64m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 512m
+    cpus: 1.0
+    init: true
+    restart: unless-stopped

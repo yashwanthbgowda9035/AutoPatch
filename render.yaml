@@ -1,0 +1,16 @@
+# Optional Render Blueprint: deploy this repo as a public, non-executing preview.
+# Never mount the Docker socket or enable arbitrary code execution on a public endpoint.
+services:
+  - type: web
+    name: autopatch-preview
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: AUTOPATCH_PUBLIC_DEMO
+        value: "1"
+      - key: AUTOPATCH_ALLOWED_HOSTS
+        value: "*.onrender.com,localhost,127.0.0.1"
+      - key: PYTHONUNBUFFERED
+        value: "1"

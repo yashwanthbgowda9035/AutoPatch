@@ -1,0 +1,60 @@
+/* AutoPatch Velocity 5.2 — transparent glass dock and no vertical-entry choreography.
+   All effects are CSS-only presentation; app API behavior is unchanged. */
+:root{--glass-ink:rgba(15,20,29,.38);--glass-edge:rgba(255,255,255,.31);--glass-glow:rgba(255,255,255,.12)}
+/* A scene now expands from the center. The previous scene recedes with blur,
+   rather than sliding upward from the bottom. */
+.scene{transform:scale(.82);filter:blur(26px) brightness(.76);opacity:0;transition:transform .72s cubic-bezier(.19,1,.22,1),opacity .58s ease,filter .68s ease,visibility 0s linear .73s!important;transform-origin:center center!important}
+.scene.active{transform:scale(1);filter:blur(0) brightness(1);opacity:1;transition-delay:0s}
+.scene.scene-exit{transform:scale(1.13)!important;filter:blur(27px) brightness(1.2)!important;opacity:0!important;visibility:visible!important;pointer-events:none!important}
+.scene.scene-enter{animation:glassSceneEnter .78s cubic-bezier(.18,1,.24,1) both!important;visibility:visible!important;pointer-events:auto!important}
+@keyframes glassSceneEnter{0%{opacity:0;transform:scale(.82);filter:blur(30px) brightness(1.34)}56%{opacity:1;filter:blur(5px) brightness(1.07)}100%{opacity:1;transform:scale(1);filter:blur(0) brightness(1)}}
+/* No upward slide-in anywhere on the hero or modules. */
+.hero-line{overflow:visible!important}
+.hero-line>span,.hero-description,.hero-buttons,.hero-coordinates,.tool-scene.active .scene-intro,.tool-scene.active .glass-panel{animation-name:glassReveal!important;animation-duration:.74s!important;animation-timing-function:cubic-bezier(.18,1,.25,1)!important;animation-fill-mode:both!important;transform-origin:center center!important}
+.hero-line:nth-child(2)>span{animation-delay:.13s!important}.hero-line:nth-child(3)>span{animation-delay:.25s!important}
+.hero-description{animation-delay:.34s!important}.hero-buttons{animation-delay:.46s!important}.hero-coordinates{animation-delay:.09s!important}
+.tool-scene.active .scene-intro{animation-delay:.1s!important}.tool-scene.active .glass-panel{animation-delay:.18s!important}.tool-scene.active .glass-panel:nth-child(2){animation-delay:.27s!important}
+@keyframes glassReveal{0%{opacity:0;transform:scale(.79);filter:blur(24px)}60%{opacity:.96;transform:scale(1.035);filter:blur(3px)}100%{opacity:1;transform:scale(1);filter:blur(0)}}
+/* The old vertical shutter is deliberately removed; switching scenes now relies
+   on the centered optical zoom/defocus effect above. */
+#transition-shutter,#transition-shutter.animating{display:none!important;animation:none!important}
+/* iOS-like frosted glass treatments: bright outline, internal specular highlight,
+   translucent fill, and subtle sheen. Avoid opaque neon action rectangles. */
+.main-cta,.sub-cta,.action-primary,.action-secondary,.minimal-btn,.quiet-button,.file-button,.nav-link,.explore-next{
+ position:relative;isolation:isolate;overflow:hidden;
+ color:#f7fafb!important;
+ background:linear-gradient(146deg,rgba(255,255,255,.25),rgba(255,255,255,.085) 44%,rgba(255,255,255,.035))!important;
+ border:1px solid var(--glass-edge)!important;
+ border-radius:999px!important;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.42),inset 0 -1px 0 rgba(255,255,255,.06),0 10px 30px rgba(0,0,0,.28),0 0 0 1px rgba(255,255,255,.025)!important;
+ backdrop-filter:blur(24px) saturate(155%)!important;
+ -webkit-backdrop-filter:blur(24px) saturate(155%)!important;
+ text-shadow:0 1px 8px rgba(0,0,0,.5);
+ transition:transform .34s cubic-bezier(.18,1.6,.22,1),background .34s ease,border-color .34s ease,box-shadow .34s ease,filter .34s ease!important
+}
+.main-cta,.action-primary{padding:17px 23px!important}
+.action-primary{padding:13px 17px!important}
+.action-secondary,.quiet-button,.minimal-btn{padding:12px 15px!important}
+.nav-link{padding:12px 15px!important;border-bottom:1px solid var(--glass-edge)!important;font-size:10px}
+.nav-link.selected{background:linear-gradient(150deg,rgba(255,255,255,.30),rgba(190,230,244,.13))!important;border-color:rgba(255,255,255,.60)!important;box-shadow:inset 0 1px rgba(255,255,255,.45),0 0 26px rgba(214,241,255,.10)!important}
+.main-cta::after,.action-primary::after{inset:0!important;border-radius:inherit;background:linear-gradient(110deg,transparent 28%,rgba(255,255,255,.22) 48%,transparent 63%)!important;transform:translateX(-120%);animation:glassSheen 7s ease-in-out infinite!important;opacity:.55}
+@keyframes glassSheen{0%,75%{transform:translateX(-130%)}94%,100%{transform:translateX(135%)}}
+.main-cta:hover,.sub-cta:hover,.action-primary:hover,.action-secondary:hover,.minimal-btn:hover,.quiet-button:hover,.file-button:hover,.nav-link:hover,.explore-next:hover{
+ transform:scale(1.065)!important;background:linear-gradient(150deg,rgba(255,255,255,.33),rgba(255,255,255,.12))!important;
+ border-color:rgba(255,255,255,.75)!important;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.65),0 17px 44px rgba(0,0,0,.36),0 0 30px rgba(180,230,255,.10)!important;
+ filter:brightness(1.1)
+}
+.main-cta:active,.sub-cta:active,.action-primary:active,.action-secondary:active,.minimal-btn:active,.quiet-button:active,.file-button:active,.nav-link:active,.explore-next:active{transform:scale(.95)!important;filter:brightness(.96)}
+button:focus-visible,.file-button:focus-within{outline:2px solid #fff;outline-offset:4px}
+button:disabled{opacity:.36!important;transform:none!important}
+.file-button{display:inline-flex;align-items:center;justify-content:center}
+/* Dock becomes a glass capsule, not a row of flat menu links. */
+.site-nav{background:rgba(255,255,255,.07)!important;border:1px solid rgba(255,255,255,.17);padding:5px!important;border-radius:999px;backdrop-filter:blur(30px) saturate(145%);-webkit-backdrop-filter:blur(30px) saturate(145%);gap:5px!important;box-shadow:inset 0 1px #ffffff38,0 12px 28px #0005}
+.site-header{background:rgba(5,9,13,.36)!important;backdrop-filter:blur(26px) saturate(125%);-webkit-backdrop-filter:blur(26px) saturate(125%)}
+.glass-panel{background:linear-gradient(150deg,rgba(255,255,255,.13),rgba(255,255,255,.045) 42%,rgba(10,15,23,.28))!important;border:1px solid rgba(255,255,255,.20)!important;backdrop-filter:blur(28px) saturate(120%);-webkit-backdrop-filter:blur(28px) saturate(120%);box-shadow:inset 0 1px #ffffff1e,0 20px 65px #0005!important}
+.glass-panel:hover{transform:none!important;border-color:rgba(255,255,255,.35)!important}
+/* Respect system settings and existing motion toggle. */
+body.motion-off .hero-line>span,body.motion-off .hero-description,body.motion-off .hero-buttons,body.motion-off .hero-coordinates,body.motion-off .tool-scene.active .scene-intro,body.motion-off .tool-scene.active .glass-panel,body.motion-off .scene.scene-enter{animation:none!important}
+@media(max-width:800px){.site-nav{width:100%;justify-content:space-evenly;overflow-x:auto}.nav-link{padding:10px 9px!important;font-size:9px}.hero-buttons{gap:11px}.main-cta{padding:14px 17px!important}}
+@media(prefers-reduced-motion:reduce){.scene,.scene.active,.scene.scene-enter,.scene.scene-exit{animation:none!important;transition:none!important;filter:none!important}.hero-line>span,.hero-description,.hero-buttons,.hero-coordinates,.tool-scene.active .scene-intro,.tool-scene.active .glass-panel{animation:none!important}.main-cta::after,.action-primary::after{animation:none!important}}

@@ -1,0 +1,47 @@
+/* AutoPatch Velocity 5.3 — SPORT GLASS. Functional UI animation only. */
+:root{--sport-ice:#d9f5ff;--sport-lime:#b7ff80;--sport-frost:rgba(239,249,255,.13)}
+/* Desktop taskbar-inspired magnetic, enlarged navigation dock. */
+.site-header{overflow:visible!important;isolation:isolate}
+.site-nav{gap:6px!important;padding:7px!important;background:linear-gradient(155deg,rgba(255,255,255,.15),rgba(227,244,254,.035))!important;border:1px solid rgba(255,255,255,.24)!important;box-shadow:inset 0 1px 0 #ffffff50,0 15px 55px #0009,0 0 28px #d9f5ff12!important;overflow:visible!important}
+.site-nav .nav-link{position:relative!important;z-index:1;will-change:transform;transform-origin:center bottom;--dock-scale:1;transform:translate3d(0,var(--dock-lift,0px),0) scale(var(--dock-scale))!important;transition:transform .32s cubic-bezier(.14,1.6,.2,1),border-color .25s,background .25s,box-shadow .25s!important;overflow:visible!important;min-width:65px!important}
+.site-nav .nav-link:before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at var(--light-x,50%) var(--light-y,15%),rgba(255,255,255,.23),transparent 54%);opacity:0;transition:opacity .2s;pointer-events:none}
+.site-nav .nav-link:is(:hover,:focus-visible):before{opacity:1}
+.site-nav .nav-link:is(:hover,:focus-visible){border-color:#ffffff99!important;background:rgba(255,255,255,.18)!important;box-shadow:inset 0 1px #ffffff80,0 8px 24px #0007,0 0 24px #c6f3ff1c!important}
+.site-nav .nav-link.selected:after{bottom:-8px!important;left:45%!important;right:45%!important;background:var(--sport-ice)!important;box-shadow:0 0 14px #b6e9ff}
+/* Temporary small preview is fixed and clamped to viewport through JS. */
+.sport-dock-preview{position:fixed;z-index:100;top:80px;left:50%;width:276px;max-width:calc(100vw - 24px);padding:12px;border:1px solid rgba(255,255,255,.35);background:linear-gradient(145deg,rgba(215,235,246,.24),rgba(23,34,49,.56) 49%,rgba(12,21,33,.69));box-shadow:inset 0 1px 0 #ffffff59,0 22px 72px #000b,0 0 45px #d7f8ff12;border-radius:25px;backdrop-filter:blur(38px) saturate(160%);-webkit-backdrop-filter:blur(38px) saturate(160%);pointer-events:none;opacity:0;visibility:hidden;transform:translate3d(-50%,12px,0) scale(.83);filter:blur(17px);transition:opacity .23s ease,transform .42s cubic-bezier(.14,1.56,.26,1),filter .27s,visibility 0s linear .24s;overflow:hidden}
+.sport-dock-preview.open{opacity:1;visibility:visible;transform:translate3d(-50%,0,0) scale(1);filter:blur(0);transition-delay:0s}
+.sport-dock-preview:before{content:"";position:absolute;width:240px;height:170px;left:-60px;top:-80px;background:radial-gradient(circle,#d9f5ff2a,transparent 70%);pointer-events:none}
+.preview-top,.preview-foot{display:flex;justify-content:space-between;align-items:center;font:800 9px/1.2 var(--mono);letter-spacing:.12em;color:#e7f4ff}
+.preview-live{display:flex;align-items:center;gap:6px;color:#c8e8f1}.preview-live i{width:6px;height:6px;background:var(--sport-lime);box-shadow:0 0 10px #b7ff8088;border-radius:50%}
+.preview-stage{height:115px;margin:12px 0;position:relative;border-radius:17px;border:1px solid #ffffff2b;background:radial-gradient(circle at 70% 34%,#a4dcff24,transparent 46%),linear-gradient(145deg,#0b1623f0,#122130b0);overflow:hidden;isolation:isolate}
+.preview-stage:after{content:"";position:absolute;left:-40%;top:-20%;width:130%;height:145%;border-radius:50%;border:1px solid #c3eeff23;box-shadow:0 0 0 30px #ffffff06,0 0 0 64px #ffffff04;animation:previewBreathe 4s ease-in-out infinite alternate}
+.preview-watermark{position:absolute;right:8%;top:5%;font:900 86px/1 var(--display);letter-spacing:-.12em;color:#ffffff0f;transform:rotate(-10deg)}
+.preview-graphic{position:absolute;left:18px;bottom:18px;display:flex;gap:7px;align-items:end;height:55px;z-index:1}.preview-graphic span{width:9px;height:30%;background:linear-gradient(#e7fbff,#8bcce0);border-radius:9px;box-shadow:0 0 15px #d9f5ff28;animation:previewEqualizer 1.15s ease-in-out infinite alternate}.preview-graphic span:nth-child(2){height:84%;animation-delay:-.25s}.preview-graphic span:nth-child(3){height:55%;animation-delay:-.55s}.preview-graphic span:nth-child(4){height:100%;animation-delay:-.35s}.preview-graphic span:nth-child(5){height:46%;animation-delay:-.7s}
+.preview-copy strong{display:block;color:#fff;font:900 18px/1.15 var(--display);letter-spacing:-.045em}.preview-copy small{display:block;color:#b8cad3;font:500 10px/1.55 var(--mono);margin:6px 0 10px}.preview-foot{padding-top:9px;border-top:1px solid #ffffff25;color:#b1c8d0}.preview-foot b{color:#fff;font-size:17px}
+/* True directional zoom: incoming section comes FROM depth; outgoing shrinks AWAY into depth. */
+.scene.scene-exit{transform:scale(.67)!important;filter:blur(42px) brightness(.52)!important;opacity:0!important;visibility:visible!important;transition:transform .78s cubic-bezier(.22,.8,.22,1),filter .72s ease,opacity .56s ease!important;z-index:1!important;pointer-events:none!important}
+.scene.scene-enter{animation:sportEnter .8s cubic-bezier(.13,.9,.2,1) both!important;z-index:2!important;visibility:visible!important;pointer-events:auto!important}
+@keyframes sportEnter{0%{opacity:0;transform:scale(1.38);filter:blur(45px) brightness(1.3)}55%{opacity:.86;filter:blur(8px) brightness(1.08)}82%{transform:scale(.985)}100%{opacity:1;transform:scale(1);filter:blur(0) brightness(1)}}
+/* Sporty pop on hovered actionable controls and cards, using separate lift from their zoom reveal animations. */
+.main-cta,.sub-cta,.action-primary,.action-secondary,.minimal-btn,.quiet-button,.explore-next,.file-button{--mag-x:0px;--mag-y:0px;--sport-scale:1;transform:translate3d(var(--mag-x),var(--mag-y),0) scale(var(--sport-scale))!important;transition:transform .38s cubic-bezier(.14,1.7,.24,1),box-shadow .3s,background .25s,border-color .25s!important}
+.main-cta:is(:hover,:focus-visible),.sub-cta:is(:hover,:focus-visible),.action-primary:is(:hover,:focus-visible),.action-secondary:is(:hover,:focus-visible),.minimal-btn:is(:hover,:focus-visible),.quiet-button:is(:hover,:focus-visible),.explore-next:is(:hover,:focus-visible),.file-button:is(:hover,:focus-within){--sport-scale:1.075;box-shadow:inset 0 1px #ffffffb0,0 16px 42px #0009,0 0 32px #9de3ff28!important}
+.main-cta:active,.sub-cta:active,.action-primary:active,.action-secondary:active,.quiet-button:active{--sport-scale:.94}
+.main-cta:before,.sub-cta:before,.action-primary:before,.action-secondary:before,.quiet-button:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at var(--light-x,50%) var(--light-y,40%),rgba(255,255,255,.24),transparent 57%);opacity:.15;transition:opacity .3s}
+.main-cta:hover:before,.sub-cta:hover:before,.action-primary:hover:before,.action-secondary:hover:before,.quiet-button:hover:before{opacity:1}
+/* Cards tilt a little around the pointer; content doesn't jump to a different section. */
+.glass-panel{--tilt-x:0deg;--tilt-y:0deg;transform:perspective(1100px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateZ(0)!important;transition:transform .3s ease,border-color .3s,box-shadow .3s!important;border-radius:19px!important;position:relative}
+.glass-panel:after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(420px circle at var(--light-x,50%) var(--light-y,50%),rgba(219,247,255,.09),transparent 66%);opacity:0;pointer-events:none;transition:opacity .2s}
+.glass-panel:hover:after{opacity:1}.glass-panel:hover{border-color:#d0f1ff66!important;box-shadow:0 25px 70px #0008,0 0 24px #c8ebff14!important}
+/* Tiny cursor-reactive ambient highlight, no actual cursor replacement. */
+#sports-pointer-glow{position:fixed;z-index:8;width:230px;height:230px;left:-300px;top:-300px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#d9f5ff17,transparent 67%);mix-blend-mode:screen;pointer-events:none;opacity:0;transition:opacity .25s ease}
+body.sports-pointer-visible #sports-pointer-glow{opacity:1}
+/* The new motion stays entirely visual: no fake engine results or toast dialogs. */
+@keyframes previewBreathe{to{transform:scale(1.12) rotate(6deg);opacity:.5}}
+@keyframes previewEqualizer{to{height:25%;filter:brightness(1.2)}}
+@media(max-width:930px){.sport-dock-preview{display:none!important}.site-nav .nav-link{min-width:0!important}.site-nav{gap:3px!important}}
+@media(hover:none),(pointer:coarse){#sports-pointer-glow{display:none!important}.glass-panel{transform:none!important}.site-nav .nav-link{transform:none!important}.sport-dock-preview{display:none!important}}
+@media(prefers-reduced-motion:reduce){.scene.scene-exit,.scene.scene-enter{animation:none!important;transition:none!important;transform:none!important;filter:none!important}.sport-dock-preview,.preview-stage:after,.preview-graphic span{animation:none!important;transition:none!important}.main-cta,.sub-cta,.action-primary,.action-secondary,.nav-link,.quiet-button,.glass-panel{transform:none!important;transition:none!important}#sports-pointer-glow{display:none!important}}
+body.motion-off .sport-dock-preview,body.motion-off .preview-stage:after,body.motion-off .preview-graphic span{animation:none!important}
+body.motion-off .glass-panel,body.motion-off .nav-link,body.motion-off .main-cta,body.motion-off .action-primary,body.motion-off .action-secondary{transform:none!important}
+body.motion-off #sports-pointer-glow{display:none!important}
